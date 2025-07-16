@@ -28,8 +28,6 @@ export const Configuration: LoadableStelleConfiguration = {
         const filenames: string[] = ["local.config", "default.config"];
         const extensions: string[] = [".js", ".ts"];
 
-        let isFound: boolean = false;
-
         for (const filename of filenames) {
             for (const ext of extensions) {
                 const file = join(directory, `${filename}${ext}`);
@@ -37,29 +35,21 @@ export const Configuration: LoadableStelleConfiguration = {
                 const i: StelleConfiguration | null = await import(`${pathToFileURL(file)}`)
                     .then((i) => i.default ?? i)
                     .catch((error) => {
-                        if (error.stack.includes("ERR_MODULE_NOT_FOUND"))
-                            throw new InvalidConfiguration(
-                                `The config file '${filename}' does not exist. Please create it or check the path.`,
-                            );
-
+                        if (error.stack.includes("ERR_MODULE_NOT_FOUND")) {
+                            return null;
+                        }
                         throw error;
                     });
 
                 if (!i || (typeof i === "object" && !Object.keys(i).length)) continue;
 
                 Object.assign(this, i);
-                isFound = true;
-
-                break;
+                isInitialized = true;
+                return;
             }
-
-            if (isFound) break;
         }
 
-        if (!isFound)
-            throw new InvalidConfiguration(`No config file found in '/config/' with any of the filenames: \n- ${filenames.join("\n- ")}`);
-
-        isInitialized = true;
+        throw new InvalidConfiguration(`No config file found in '/config/' with any of the filenames: \n- ${filenames.join("\n- ")}`);
     },
 };
 

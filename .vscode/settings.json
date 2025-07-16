@@ -4,4 +4,10 @@
     "[prisma]": {
         "editor.defaultFormatter": "Prisma.prisma"
     },
+    "[typescript]": {
+        "editor.defaultFormatter": "biomejs.biome"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "biomejs.biome"
+    }
 }

@@ -1,9 +1,16 @@
 {
     "$schema": "https://biomejs.dev/schemas/2.1.1/schema.json",
-    "assist": { "actions": { "source": { "organizeImports": "on" } } },
+    "assist": {
+        "actions": {
+            "source": {
+                "organizeImports": "on"
+            }
+        }
+    },
     "linter": {
         "enabled": true,
         "rules": {
+            "recommended": true,
             "suspicious": {
                 "noExplicitAny": "off",
                 "noConfusingVoidType": "off",
@@ -51,6 +58,10 @@
             "performance": {
                 "noBarrelFile": "off",
                 "useTopLevelRegex": "off"
+            },
+            "nursery": {
+                "noMisusedPromises": "error",
+                "noFloatingPromises": "error"
             }
         }
     },
