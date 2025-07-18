@@ -197,14 +197,14 @@ export const createDirectory = async (dirname: string): Promise<string> => {
 
 /**
  * Cleanup function to gracefully shut down the client.
- * @param this {UsingClient} The client instance.
- * @returns {void} Aishite, aishite, motte, motte
+ * @param client {UsingClient} The client instance.
+ * @returns {void} Aishite, aishite, motto, motto
  */
-export function cleanup(this: UsingClient): void {
-    this.logger.info("Shutting down the client...");
+export function cleanup(client: UsingClient): void {
+    client.logger.info("Shutting down the client...");
 
-    this.database.disconnect();
-    this.gateway.disconnectAll();
+    client.database.disconnect();
+    client.gateway.disconnectAll();
 
     process.exit(0);
 }

@@ -15,7 +15,6 @@ import { Constants } from "#stelle/utils/data/constants.js";
 // get the base directory for the bot
 // more funny.
 const base = Constants.WorkingDirectory();
-
 export default config.bot({
     token: Environment.Token ?? "Ganyu on top!",
     debug: Constants.Debug,

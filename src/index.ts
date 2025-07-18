@@ -25,7 +25,7 @@ const client = new Stelle();
 export { client };
 
 // "Warning: Detected unsettled top-level await" my ass
-void client.run();
+(async (): Promise<void> => await client.run())();
 
-process.on("SIGINT", cleanup.bind(client));
-process.on("SIGTERM", cleanup.bind(client));
+process.on("SIGINT", () => cleanup(client));
+process.on("SIGTERM", () => cleanup(client));

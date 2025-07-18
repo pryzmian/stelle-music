@@ -26,7 +26,7 @@ export const Configuration: LoadableStelleConfiguration = {
 
         const directory: string = await BaseClient.prototype.getRC().then((i) => i.locations.config);
         const filenames: string[] = ["local.config", "default.config"];
-        const extensions: string[] = [".js", ".ts"];
+        const extensions: string[] = [".ts", ".js"];
 
         for (const filename of filenames) {
             for (const ext of extensions) {
