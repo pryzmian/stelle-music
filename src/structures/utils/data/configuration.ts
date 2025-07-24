@@ -1,7 +1,7 @@
 import { join } from "node:path";
-import { pathToFileURL } from "node:url";
 import type { LoadableStelleConfiguration, StelleConfiguration, StelleEnvironment } from "#stelle/types";
 import { InvalidConfiguration } from "#stelle/utils/errors.js";
+import { customImport } from "../functions/utils.js";
 
 // extract the environment variables from the .env file
 const { TOKEN, DATABASE_URL, ERRORS_WEBHOOK, REDIS_HOST, REDIS_PORT, REDIS_PASSWORD, REDIS_USERNAME } = process.env;
@@ -32,14 +32,10 @@ export const Configuration: LoadableStelleConfiguration = {
             for (const ext of extensions) {
                 const file = join(directory, `${filename}${ext}`);
 
-                const i: StelleConfiguration | null = await import(`${pathToFileURL(file)}`)
-                    .then((i) => i.default ?? i)
-                    .catch((error) => {
-                        if (error.stack.includes("ERR_MODULE_NOT_FOUND")) {
-                            return null;
-                        }
-                        throw error;
-                    });
+                const i: StelleConfiguration | null = await customImport<StelleConfiguration>(file).catch((error) => {
+                    if (error.stack.includes("ERR_MODULE_NOT_FOUND")) return null;
+                    throw error;
+                });
 
                 if (!i || (typeof i === "object" && !Object.keys(i).length)) continue;
 

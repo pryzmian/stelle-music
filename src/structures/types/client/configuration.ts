@@ -142,7 +142,7 @@ export interface StelleConfiguration {
      */
     githubLink: string;
     /**
-     * The default player lyrics enabled.
+     * The default lyrics lines to show.
      * @type {number}
      * @default 10
      */

@@ -1,7 +1,7 @@
-import { pathToFileURL } from "node:url";
 import type { UsingClient } from "seyfert";
 import { BaseHandler } from "seyfert/lib/common/index.js";
 import type { LavalinkEvents } from "#stelle/types";
+import { customImport } from "../functions/utils.js";
 import type { Lavalink } from "./events.js";
 
 /**
@@ -13,15 +13,6 @@ type LavalinkEventParameters = Parameters<LavalinkEvents[keyof LavalinkEvents]>;
  * The event names of the lavalink events.
  */
 type LavalinkEventNames = keyof LavalinkEvents;
-
-/**
- *
- * Import a file dynamically.
- * @param {string} path The path to the file.
- * @returns {Promise<T>} The imported file.
- */
-const customImport = <T>(path: string): Promise<T> =>
-    import(`${pathToFileURL(path)}?update=${Date.now()}`).then((x) => x.default ?? x) as Promise<T>;
 
 /**
  * Class representing the lavalink handler.

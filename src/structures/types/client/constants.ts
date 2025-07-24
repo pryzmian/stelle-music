@@ -121,4 +121,10 @@ export interface StelleConstants {
      * @param {boolean} alt Whether to use the alternative mode or not.
      */
     LoopMode(mode: RepeatMode, alt?: boolean): RepeatMode;
+    /**
+     * Build the key for the Redis queue store.
+     * @param {string} guildId The guild id to build the key for.
+     * @returns {string} The built key.
+     */
+    BuildKey(guildId: string): string;
 }

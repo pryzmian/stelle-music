@@ -29,6 +29,9 @@ export const Constants: StelleConstants = {
     WorkingDirectory(): WorkingDirectory {
         return this.Dev ? "src" : "dist";
     },
+    BuildKey(guildId): string {
+        return this.Dev ? `internal:${guildId}` : `stelle:${guildId}`;
+    },
     ThinkMessage(): string {
         const messages: string[] = [
             "is thinking...",

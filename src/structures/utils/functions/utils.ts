@@ -1,6 +1,7 @@
 import { existsSync } from "node:fs";
 import { mkdir } from "node:fs/promises";
 import { isAbsolute, join } from "node:path";
+import { pathToFileURL } from "node:url";
 import { inspect } from "node:util";
 import type { Player } from "lavalink-client";
 import {
@@ -240,6 +241,19 @@ export const omitKeys = <T extends Record<string, any>, K extends keyof T>(obj: 
 /**
  * Convert a string to snake_case.
  * @param {string} text The text to convert.
+ * @param {boolean} [upper=false] Whether to convert to uppercase or not.
  * @returns {string} The converted text.
  */
-export const convertToSnakeCase = (text: string): string => text.replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase();
+export const convertToSnakeCase = (text: string, upper: boolean = false): string => {
+    const result = text.replace(/([a-z])([A-Z])/g, "$1_$2");
+    return upper ? result.toUpperCase() : result.toLowerCase();
+};
+
+/**
+ *
+ * Import a file dynamically.
+ * @param {string} path The path to the file.
+ * @returns {Promise<T>} The imported file.
+ */
+export const customImport = <T>(path: string): Promise<T> =>
+    import(`${pathToFileURL(path)}?update=${Date.now()}`).then((x) => x.default ?? x) as Promise<T>;

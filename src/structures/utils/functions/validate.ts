@@ -19,7 +19,7 @@ export function validateEnv(): void {
     for (const [key, value] of Object.entries(Environment)) {
         if (!isValid(value))
             throw new InvalidEnvValue(
-                `The key '${convertToSnakeCase(key).toUpperCase()}' is not a valid primitive type or is empty, null or undefined.`,
+                `The key '${convertToSnakeCase(key, true)}' is not a valid primitive type or is empty, null or undefined.`,
             );
     }
 

@@ -6,15 +6,6 @@ import type { RedisClient } from "./modules/Redis.js";
  * The stored queue partial type.
  */
 type PartialStoredQueue = Partial<StoredQueue>;
-
-/**
- *
- * Build a key for the queue.
- * @param {string} guildId The guild id.
- * @returns {string} The built key.
- */
-const buildKey = (guildId: string): string => (Constants.Dev ? `queue:${guildId}` : `stelle:queue:${guildId}`);
-
 /**
  * Class representing the Redis queue store.
  * @class RedisQueueStore
@@ -44,7 +35,7 @@ export class RedisQueueStore implements QueueStoreManager {
      * @returns {Promise<StoredQueue | string>} The queue.
      */
     public async get(id: string): Promise<StoredQueue | string> {
-        const data = await this.redis.get<StoredQueue | string>(buildKey(id));
+        const data = await this.redis.get<StoredQueue | string>(Constants.BuildKey(id));
         if (!data) return "";
 
         return data;
@@ -58,7 +49,7 @@ export class RedisQueueStore implements QueueStoreManager {
      * @returns {Promise<void>} A promise.
      */
     public set(id: string, value: StoredQueue | string): Promise<void> {
-        return this.redis.set(buildKey(id), value as string);
+        return this.redis.set(Constants.BuildKey(id), value as string);
     }
 
     /**
@@ -68,7 +59,7 @@ export class RedisQueueStore implements QueueStoreManager {
      * @returns {Promise<void>} If the queue was deleted.
      */
     public delete(id: string): Promise<void> {
-        return this.redis.del(buildKey(id));
+        return this.redis.del(Constants.BuildKey(id));
     }
 
     /**
@@ -88,7 +79,7 @@ export class RedisQueueStore implements QueueStoreManager {
      * @returns {PartialStoredQueue} The parsed value.
      */
     public parse(value: StoredQueue | string): PartialStoredQueue {
-        if (typeof value === "string" && !value.length) return {};
+        if ((typeof value === "string" && !value.length) || (typeof value === "object" && !Object.keys(value).length)) return {};
         return typeof value === "string" ? JSON.parse(value) : value;
     }
 }
