@@ -1,0 +1,37 @@
+services:
+  bot:
+    build: .
+    container_name: stelle-bot
+    restart: unless-stopped
+    environment:
+      # Discord Bot Configuration
+      - TOKEN=${TOKEN}
+      - ERRORS_WEBHOOK=${ERRORS_WEBHOOK}
+      
+      # Database Configuration (external MongoDB)
+      - DATABASE_URL=${DATABASE_URL}
+      
+      # Redis Configuration (external Redis)
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_USERNAME=${REDIS_USERNAME}
+    
+    volumes:
+      # Persist logs
+      - ./logs:/app/logs
+      # Persist cache
+      - ./cache:/app/cache
+    
+    # If your bot needs to expose any ports (e.g., for webhooks or API)
+    # ports:
+    #   - "3000:3000"
+    
+    # Add any additional configuration as needed
+    # networks:
+    #   - stelle-network
+
+# If you want to add external services later, uncomment and configure:
+# networks:
+#   stelle-network:
+#     driver: bridge
