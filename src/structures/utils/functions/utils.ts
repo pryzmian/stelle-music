@@ -204,8 +204,8 @@ export const createDirectory = async (dirname: string): Promise<string> => {
 export function cleanup(client: UsingClient): void {
     client.logger.info("Shutting down the client...");
 
-    client.database.disconnect();
-    client.gateway.disconnectAll();
+    client.database?.disconnect();
+    client.gateway?.disconnectAll();
 
     process.exit(0);
 }
