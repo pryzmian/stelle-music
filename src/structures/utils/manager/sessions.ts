@@ -28,7 +28,7 @@ const dir: string = await createDirectory(Constants.CachePath);
  * The name of the sessions file without the `.json` extension.
  * @type {string}
  */
-const name = Constants.SessionsFile.replace(/\.json$/, "").trim();
+const name: string = Constants.SessionsFile.replace(/\.json$/, "").trim();
 
 /**
  * The storage for player sessions.
