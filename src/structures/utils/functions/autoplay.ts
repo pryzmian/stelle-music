@@ -60,13 +60,11 @@ export async function autoPlayFunction(player: Player, lastTrack?: Track): Promi
 
     switch (lastTrack.info.sourceName) {
         case "spotify": {
-            const filtered = player.queue.previous.filter(({ info }) => info.sourceName === "spotify").slice(0, 1);
-            if (!filtered.length) filtered.push(lastTrack);
+            const filtered = player.queue.previous.filter(({ info }) => info.sourceName === "spotify");
+            const first = filtered.at(0);
+            if (!first) return;
 
-            const ids = filtered.map(
-                ({ info }) => info.identifier ?? info.uri.split("/").reverse()?.[0] ?? info.uri.split("/").reverse()?.[1],
-            );
-            const res = await player.search({ query: `seed_tracks=${ids.join(",")}`, source: "sprec" }, me);
+            const res = await player.search({ query: `mix:track:${first.info.identifier}`, source: "sprec" }, me);
 
             if (res.tracks.length) {
                 const track = filter(player, lastTrack, res.tracks)[Math.floor(Math.random() * res.tracks.length)] as Track;

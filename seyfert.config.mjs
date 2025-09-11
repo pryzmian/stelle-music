@@ -23,7 +23,6 @@ export default config.bot({
         GatewayIntentBits.Guilds,
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildVoiceStates,
     ],
     /**

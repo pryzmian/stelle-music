@@ -6,7 +6,6 @@ import {
     type ButtonInteraction,
     type Embed,
     type Message,
-    type MessageBuilderComponents,
     StringSelectMenu,
     type StringSelectMenuInteraction,
     type WebhookMessage,
@@ -111,11 +110,11 @@ const defaultTime: number = 60e3;
  *
  * Get the current row of the paginator.
  * @param {EmbedPaginator} this The paginator instance.
- * @returns {ActionRow<MessageBuilderComponents>[]} The current row.
+ * @returns {ActionRow<ActionBuilderComponents>[]} The current row.
  */
-function getRows(this: EmbedPaginator): ActionRow<MessageBuilderComponents>[] {
-    const rows: ActionRow<MessageBuilderComponents>[] = [
-        new ActionRow<MessageBuilderComponents>().addComponents(
+function getRows(this: EmbedPaginator): ActionRow<ActionBuilderComponents>[] {
+    const rows: ActionRow<ActionBuilderComponents>[] = [
+        new ActionRow<ActionBuilderComponents>().addComponents(
             new Button()
                 .setEmoji("<:forward:1061798317417312306>")
                 .setStyle(ButtonStyle.Secondary)
