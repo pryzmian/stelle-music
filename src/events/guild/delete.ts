@@ -4,8 +4,7 @@ import { Constants } from "#stelle/utils/data/constants.js";
 export default createEvent({
     data: { name: "guildDelete" },
     async run(guild, client): Promise<void> {
-        if (guild.unavailable) return;
-        if (!(guild instanceof Guild)) return;
+        if (guild.unavailable || !(guild instanceof Guild)) return;
 
         if (Constants.Debug) return client.debugger?.info(`Guild: ${guild.id} | Deleted: ${guild.name}`);
 
