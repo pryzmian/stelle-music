@@ -8,14 +8,16 @@ export default createEvent({
 
         if (Constants.Debug) return client.debugger?.info(`Guild: ${guild.id} | Deleted: ${guild.name}`);
 
-        const owner = await guild.fetchOwner();
+        const owner = await guild.fetchOwner().catch(() => null);
+        const ownerName = owner?.displayName ?? "Unknown";
+
         const embed = new Embed()
             .setColor("Red")
             .setTitle("A guild removed me!")
             .setDescription("`📦` A guild removed me... I think I was not helpful...")
             .addFields(
                 { name: "`📜` Name", value: `\`${guild.name}\``, inline: true },
-                { name: "`👤` Owner", value: `\`${owner?.displayName ?? "Unknown"}\``, inline: true },
+                { name: "`👤` Owner", value: `\`${ownerName}\``, inline: true },
                 { name: "`🏮` ID", value: `\`${guild.id}\``, inline: true },
                 { name: "`👥` Members", value: `\`${guild.memberCount}\``, inline: true },
             );
