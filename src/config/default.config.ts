@@ -15,6 +15,7 @@ export default createConfig({
     githubLink: "https://github.com/Ganyu-Studios/stelle-music",
     developerIds: [],
     guildIds: [],
+    presenceInterval: ms("25s"),
     nodes: Sessions.resolve(
         {
             id: "SN #1", // <--- AKA Stelle Node

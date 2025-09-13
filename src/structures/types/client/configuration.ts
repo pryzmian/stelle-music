@@ -111,6 +111,12 @@ export interface StelleConfiguration {
      */
     defaultPrefix: string;
     /**
+     * The default presence update interval in milliseconds.
+     * @type {number}
+     * @default ms("25s")
+     */
+    presenceInterval: number;
+    /**
      * The prefixes used to use text commands.
      * @type {string[]}
      * @default ["st!"]

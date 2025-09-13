@@ -2,7 +2,6 @@ import type { Guild, UsingClient } from "seyfert";
 import { type GatewayActivityUpdateData, PresenceUpdateStatus } from "seyfert/lib/types/index.js";
 
 import { Constants } from "#stelle/utils/data/constants.js";
-import { ms } from "#stelle/utils/functions/time.js";
 
 /**
  *
@@ -31,7 +30,7 @@ export function changePresence(client: UsingClient): void {
             afk: false,
             since: Date.now(),
         });
-    }, ms("25s"));
+    }, client.config.presenceInterval);
 
     client.gateway.setPresence({
         status: PresenceUpdateStatus.Online,
