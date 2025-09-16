@@ -59,7 +59,7 @@ const options = {
                         : (TimeFormat.toDotted(track.info.duration) ?? messages.commands.play.undetermined);
 
                     return {
-                        name: `${sliceText(track.info.title, 60)} (${duration}) - ${sliceText(track.info.author, 30)}`,
+                        name: `${sliceText(track.info.title, 45)} (${duration}) - ${sliceText(track.info.author, 30)}`,
                         value: track.info.uri,
                     };
                 }),
