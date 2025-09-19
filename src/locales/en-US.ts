@@ -139,6 +139,12 @@ export default {
                     rewond: "rewond",
                 },
             },
+            setchannel: {
+                noChannel: "`❌` You must provide a valid channel.",
+                noTextChannel: "`❌` The channel must be a text channel.",
+                noSameGuild: "`❌` The channel must be in this guild.",
+                success: "`✅` The requests channel has been set successfully.",
+            },
         },
         events: {
             inCooldown: ({ time }: ICooldown): string => `\`❌\` You need to wait: <t:${time}:R> (<t:${time}:t>) to use this.`,
@@ -413,6 +419,14 @@ export default {
                     name: "bot",
                     description: "Get the bot info.",
                 },
+            },
+        },
+        setchannel: {
+            name: "setchannel",
+            description: "Set the requests channel of Stelle.",
+            option: {
+                name: "channel",
+                description: "Enter the new channel.",
             },
         },
     },

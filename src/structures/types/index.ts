@@ -61,6 +61,10 @@ export enum CacheKeys {
      * The guild prefix key.
      */
     Prefix = "guild:prefix",
+    /**
+     * The guild request key.
+     */
+    Request = "guild:request",
 }
 
 /**
