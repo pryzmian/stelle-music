@@ -94,6 +94,27 @@ interface Cache {
     expire: number;
 }
 
+interface Deleter {
+    /**
+     * Whether to delete the message when the track ends.
+     * @type {boolean}
+     * @default true
+     */
+    onTrackEnd: boolean;
+    /**
+     * Whether to delete the message when the track is skipped.
+     * @type {boolean}
+     * @default true
+     */
+    onTrackSkip: boolean;
+    /**
+     * Whether to delete the message when the player is stopped.
+     * @type {boolean}
+     * @default true
+     */
+    onPlayerStop: boolean;
+}
+
 /**
  * The configuration interface.
  */
@@ -196,6 +217,11 @@ export interface StelleConfiguration {
      * @type {Cache}
      */
     cache: Cache;
+    /**
+     * The deleter message configuration.
+     * @type {Deleter}
+     */
+    deleter: Deleter;
 }
 
 /**

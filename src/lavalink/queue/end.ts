@@ -23,7 +23,10 @@ export default createLavalinkEvent({
         }
 
         const messageId = player.get<string | undefined>("messageId");
-        if (messageId) await client.messages.edit(messageId, player.textChannelId, { components: [] }).catch(() => null);
+        if (messageId) {
+            if (client.config.deleter.onTrackEnd) await client.messages.delete(messageId, player.textChannelId).catch(() => null);
+            else await client.messages.edit(messageId, player.textChannelId, { components: [] }).catch(() => null);
+        }
 
         const locale = player.get<string | undefined>("localeString");
         if (!locale) return;

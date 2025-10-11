@@ -58,4 +58,9 @@ export default createConfig({
         size: 5,
         expire: ms("5mins"),
     },
+    deleter: {
+        onTrackEnd: true,
+        onTrackSkip: true,
+        onPlayerStop: true,
+    },
 });
