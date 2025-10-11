@@ -98,19 +98,19 @@ interface Deleter {
     /**
      * Whether to delete the message when the track ends.
      * @type {boolean}
-     * @default true
+     * @default false
      */
     onTrackEnd: boolean;
     /**
      * Whether to delete the message when the track is skipped.
      * @type {boolean}
-     * @default true
+     * @default false
      */
     onTrackSkip: boolean;
     /**
      * Whether to delete the message when the player is stopped.
      * @type {boolean}
-     * @default true
+     * @default false
      */
     onPlayerStop: boolean;
 }
