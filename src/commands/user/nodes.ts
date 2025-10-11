@@ -14,7 +14,7 @@ import { EmbedPaginator } from "#stelle/utils/paginator.js";
 })
 @StelleOptions({ cooldown: 5, category: StelleCategory.User })
 @LocalesT("locales.nodes.name", "locales.nodes.description")
-export default class ExampleCommand extends Command {
+export default class NodesCommand extends Command {
     public override async run(ctx: GuildCommandContext): Promise<Message | WebhookMessage | void> {
         const { client } = ctx;
         const { messages } = await ctx.getLocale();

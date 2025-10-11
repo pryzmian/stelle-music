@@ -13,6 +13,8 @@ export default class SkipTrackComponent extends ComponentCommand {
 
         await player.skip(undefined, !player.get("enabledAutoplay"));
         await ctx.interaction.deferUpdate();
-        await ctx.interaction.message.edit({ components: [] });
+
+        if (client.config.deleter.onTrackSkip) await ctx.interaction.message.delete().catch(() => null);
+        else await ctx.interaction.message.edit({ components: [] });
     }
 }
