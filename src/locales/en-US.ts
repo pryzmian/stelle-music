@@ -13,6 +13,7 @@ export default {
     },
     messages: {
         commands: {
+            join: ({ channelId }: IChannel): string => `\`✅\` Joined the voice channel <#${channelId}>.`,
             nowplaying: ({ title, url, author, requester, bar, duration, position }: INowplaying): string =>
                 `\`📻\` Now playing: [\`${title}\`](${url}) - \`${author}\`\n\`👤\` **Requested by**: <@${requester}>\n \n\`🕛\` ${bar} | \`${position}\` - \`(${duration})\``,
             setprefix: ({ prefix }: IPrefix): string => `\`✅\` The **new prefix** for this guild is now: \`${prefix}\``,
@@ -428,6 +429,10 @@ export default {
                 name: "channel",
                 description: "Enter the new channel.",
             },
+        },
+        join: {
+            name: "join",
+            description: "Join the bot into a voice channel.",
         },
     },
 };

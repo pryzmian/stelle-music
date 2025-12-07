@@ -14,6 +14,7 @@ export default {
     },
     messages: {
         commands: {
+            join: ({ channelId }): string => `\`✅\` Me uní al canal de voz <#${channelId}>.`,
             nowplaying: ({ title, url, author, requester, bar, duration, position }): string =>
                 `\`📻\` Ahora: [\`${title}\`](${url}) - \`${author}\`\n\`👤\` **Solicitado por**: <@${requester}>\n \n\`🕛\` ${bar} | \`${position}\` - \`(${duration})\``,
             setprefix: ({ prefix }): string => `\`✅\` El **nuevo prefijo** para este servidor es: \`${prefix}\``,
@@ -423,6 +424,10 @@ export default {
                 name: "canal",
                 description: "Introduce el nuevo canal.",
             },
+        },
+        join: {
+            name: "unir",
+            description: "Une el bot a un canal de voz.",
         },
     },
 } satisfies DefaultLocale;
