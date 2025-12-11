@@ -2,8 +2,8 @@ import type { SearchPlatform } from "lavalink-client";
 import type { UsingClient } from "seyfert";
 import type { LocaleString } from "seyfert/lib/types/index.js";
 
-import { type guildRequest, PrismaClient } from "#stelle/prisma";
-import { CacheKeys, type Omit } from "#stelle/types";
+import { PrismaClient } from "#stelle/prisma";
+import { CacheKeys } from "#stelle/types";
 
 import { Cache } from "./Cache.js";
 
@@ -25,11 +25,6 @@ interface StoredPlayer {
      */
     searchPlatform: SearchPlatform;
 }
-
-/**
- * The type of the request data.
- */
-type RequestData = Omit<guildRequest, "id">;
 
 /**
  * Class representing the database.
@@ -161,20 +156,6 @@ export class StelleDatabase {
 
     /**
      *
-     * Get the guild request data from the database.
-     * @param {string} id The guild id of the request channel.
-     * @returns {Promise<RequestData | null>} The request data of the guild or null if not set.
-     */
-    public async getRequest(id: string): Promise<RequestData | null> {
-        const cache = this.cache.get(CacheKeys.Request, id);
-        if (cache) return cache;
-
-        const data = await this.prisma.guildRequest.findUnique({ where: { id } });
-        return data;
-    }
-
-    /**
-     *
      * Set the guild locale to the database.
      * @param {string} id The guild id.
      * @param {string} locale The locale to set.
@@ -231,25 +212,5 @@ export class StelleDatabase {
                 },
             })
             .then(({ id, ...rest }): void => this.cache.set(CacheKeys.Player, id, rest));
-    }
-
-    /**
-     *
-     * Set the guild request data to the database.
-     * @param {string} id The guild id of the request channel.
-     * @param {RequestData} request The request data to set.
-     * @returns {Promise<void>} A promise since we love promises.
-     */
-    public async setRequest(id: string, request: RequestData): Promise<void> {
-        await this.prisma.guildRequest
-            .upsert({
-                where: { id },
-                update: request,
-                create: {
-                    id,
-                    ...request,
-                },
-            })
-            .then(({ id, ...request }): void => this.cache.set(CacheKeys.Request, id, request));
     }
 }

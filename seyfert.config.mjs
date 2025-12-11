@@ -24,6 +24,7 @@ export default config.bot({
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.GuildPresences,
     ],
     /**
      * @type {import("seyfert").RuntimeConfig["locations"] & StelleLocations}
