@@ -59,12 +59,6 @@ export interface StelleConstants {
      */
     readonly Debug: boolean;
     /**
-     * Check if the bot is running in beta mode. (Only if the flag is provided.)
-     * @type {boolean}
-     * @default false
-     */
-    readonly Beta: boolean;
-    /**
      * The cache path where the bot stores its cache files.
      * @type {string}
      * @default "./cache"

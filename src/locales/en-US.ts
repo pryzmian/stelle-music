@@ -48,8 +48,8 @@ export default {
                         },
                         system: {
                             name: "`📋` System",
-                            value: ({ memory, uptime, version, beta }: IBotInfoSystemField): string =>
-                                `\`🧠\` Memory: \`${memory}\`\n\`📜\` Version: \`v${version}\`\n\`🕛\` Uptime: <t:${uptime}:R>\n\`🧪\` Beta: \`${beta}\``,
+                            value: ({ memory, uptime, version }: IBotInfoSystemField): string =>
+                                `\`🧠\` Memory: \`${memory}\`\n\`📜\` Version: \`v${version}\`\n\`🕛\` Uptime: <t:${uptime}:R>`,
                         },
                     },
                 },
@@ -441,7 +441,7 @@ type ILyricsEmbedFooter = { userName: string };
 type ILyricsEmbedDescription = { lines: string; provider: string; author: string };
 type ILyricsEmbedTitle = { title: string };
 type IBotInfoGeneralField = { guilds: number; users: number; players: number };
-type IBotInfoSystemField = { memory: string; uptime: number; version: string; beta: string };
+type IBotInfoSystemField = { memory: string; uptime: number; version: string };
 type IBotInfo = { clientName: string; defaultPrefix: string };
 type IHelpMenuEmbed = { clientName: string; category: string };
 type IVoiceStatus = { title: string; author: string };
