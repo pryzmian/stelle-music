@@ -26,6 +26,7 @@ export default {
             lyrics: {
                 noLyrics: "`❌` **No se encontraron letras** para esta canción...",
                 close: "Cerrar",
+                live: "Letras en Vivo",
                 embed: {
                     title: ({ title }): string => `\`📜\` Letrs para: ${title}`,
                     description: ({ lines, provider, author }): string => `-# Proveido por: ${provider}\nPor: ${author}\n\n${lines}`,
@@ -428,6 +429,10 @@ export default {
         join: {
             name: "unir",
             description: "Une el bot a un canal de voz.",
+        },
+        lyrics: {
+            name: "letras",
+            description: "Muestra las letras de la canción actual.",
         },
     },
 } satisfies DefaultLocale;

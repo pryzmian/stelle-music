@@ -27,6 +27,7 @@ export default {
             lyrics: {
                 noLyrics: "`❌` **No lyrics** was found for this track...",
                 close: "Close",
+                live: "Live Lyrics",
                 embed: {
                     title: ({ title }: ILyricsEmbedTitle): string => `\`📜\` Lyrics for: ${title}`,
                     description: ({ provider, lines, author }: ILyricsEmbedDescription): string =>
@@ -433,6 +434,10 @@ export default {
         join: {
             name: "join",
             description: "Join the bot into a voice channel.",
+        },
+        lyrics: {
+            name: "lyrics",
+            description: "Show lyrics for the current track.",
         },
     },
 };
