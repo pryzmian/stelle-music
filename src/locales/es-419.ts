@@ -26,7 +26,7 @@ export default {
             lyrics: {
                 noLyrics: "`❌` **No se encontraron letras** para esta canción...",
                 close: "Cerrar",
-                live: "Letras en Vivo",
+                sync: "Sincronizar",
                 embed: {
                     title: ({ title }): string => `\`📜\` Letrs para: ${title}`,
                     description: ({ lines, provider, author }): string => `-# Proveido por: ${provider}\nPor: ${author}\n\n${lines}`,

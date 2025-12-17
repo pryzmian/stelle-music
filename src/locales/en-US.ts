@@ -27,7 +27,7 @@ export default {
             lyrics: {
                 noLyrics: "`❌` **No lyrics** was found for this track...",
                 close: "Close",
-                live: "Live Lyrics",
+                sync: "Sync",
                 embed: {
                     title: ({ title }: ILyricsEmbedTitle): string => `\`📜\` Lyrics for: ${title}`,
                     description: ({ provider, lines, author }: ILyricsEmbedDescription): string =>

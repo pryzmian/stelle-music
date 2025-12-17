@@ -77,7 +77,7 @@ export async function displayLyrics(ctx: AnyContext): Promise<void | Message | W
         );
 
     const row: ActionRow<Button> = new ActionRow<Button>().addComponents(
-        new Button().setCustomId("player-lyricsLive").setLabel(messages.commands.lyrics.live).setStyle(ButtonStyle.Primary),
+        new Button().setCustomId("player-syncLyrics").setLabel(messages.commands.lyrics.sync).setStyle(ButtonStyle.Primary),
         new Button().setCustomId("player-lyricsDelete").setLabel(messages.commands.lyrics.close).setStyle(ButtonStyle.Secondary),
     );
 
@@ -99,7 +99,7 @@ export async function displayLyrics(ctx: AnyContext): Promise<void | Message | W
         },
     });
 
-    collector.run("player-lyricsLive", async (interaction) => {
+    collector.run("player-syncLyrics", async (interaction) => {
         const isEnabled = !!player.get("lyricsEnabled");
         if (!isEnabled) await player.subscribeLyrics();
 
