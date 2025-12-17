@@ -78,6 +78,7 @@ export async function displayLyrics(ctx: AnyContext): Promise<void | Message | W
 
     const row: ActionRow<Button> = new ActionRow<Button>().addComponents(
         new Button().setCustomId("player-lyricsLive").setLabel(messages.commands.lyrics.live).setStyle(ButtonStyle.Primary),
+        new Button().setCustomId("player-lyricsDelete").setLabel(messages.commands.lyrics.close).setStyle(ButtonStyle.Secondary),
     );
 
     const message: WebhookMessage | Message = await ctx.editOrReply({ embeds: [embed], components: [row] }, true);

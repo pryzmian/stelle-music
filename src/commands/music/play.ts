@@ -111,7 +111,10 @@ export default class PlayCommand extends Command {
         if (!player.connected) await player.connect();
 
         let bot = await me.voice().catch(() => null);
+        if (!bot) bot = await me.voice().catch(() => null);
+
         if (bot && bot.channelId !== voice.id) return;
+        if (voice.isStage() && bot?.suppress) await bot.setSuppress(false);
 
         const { loadType, playlist, tracks } = await player.search({ query, source: searchPlatform }, ctx.author);
 
@@ -119,9 +122,6 @@ export default class PlayCommand extends Command {
         if (!player.get("me")) player.set("me", omitKeys(client.me, ["client"]));
 
         const autoplayIndex = player.get("enabledAutoplay") ? 0 : undefined;
-
-        if (!bot) bot = await me.voice().catch(() => null);
-        if (voice.isStage() && bot?.suppress) await bot.setSuppress(false);
 
         switch (loadType) {
             case "empty":

@@ -67,9 +67,9 @@ export default class JoinCommand extends Command {
         if (!player.connected) await player.connect();
 
         let bot = await me.voice().catch(() => null);
-        if (bot && bot.channelId !== voice.id) return;
-
         if (!bot) bot = await me.voice().catch(() => null);
+
+        if (bot && bot.channelId !== voice.id) return;
         if (voice.isStage() && bot?.suppress) await bot.setSuppress(false);
 
         await ctx.editOrReply({

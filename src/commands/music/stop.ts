@@ -7,7 +7,7 @@ import { StelleOptions } from "#stelle/utils/decorator.js";
     description: "Stop the player.",
     integrationTypes: ["GuildInstall"],
     contexts: ["Guild"],
-    aliases: ["sp"],
+    aliases: ["destroy", "leave"],
 })
 @StelleOptions({ cooldown: 5, category: StelleCategory.Music })
 @LocalesT("locales.stop.name", "locales.stop.description")
