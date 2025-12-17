@@ -100,15 +100,13 @@ export default class PlayCommand extends Command {
         const { messages } = await ctx.locale();
         const { defaultVolume, searchPlatform } = await client.database.players.get(ctx.guildId);
 
-        const player =
-            client.manager.getPlayer(ctx.guildId) ??
-            client.manager.createPlayer({
-                guildId: ctx.guildId,
-                textChannelId: channelId,
-                voiceChannelId: voice.id,
-                volume: defaultVolume,
-                selfDeaf: true,
-            });
+        const player = client.manager.createPlayer({
+            guildId: ctx.guildId,
+            textChannelId: channelId,
+            voiceChannelId: voice.id,
+            volume: defaultVolume,
+            selfDeaf: true,
+        });
 
         if (!player.connected) await player.connect();
 

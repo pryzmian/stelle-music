@@ -56,15 +56,13 @@ export default class JoinCommand extends Command {
         const { defaultVolume } = await client.database.players.get(ctx.guildId);
         const { messages } = await ctx.locale();
 
-        const player =
-            client.manager.getPlayer(ctx.guildId) ??
-            client.manager.createPlayer({
-                guildId: ctx.guildId,
-                textChannelId: channelId,
-                voiceChannelId: channel.id,
-                volume: defaultVolume,
-                selfDeaf: true,
-            });
+        const player = client.manager.createPlayer({
+            guildId: ctx.guildId,
+            textChannelId: channelId,
+            voiceChannelId: channel.id,
+            volume: defaultVolume,
+            selfDeaf: true,
+        });
 
         if (!player.connected) await player.connect();
 
