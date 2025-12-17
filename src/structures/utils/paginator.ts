@@ -238,7 +238,7 @@ export class EmbedPaginator {
     public async reply(ephemeral: boolean = false): Promise<this> {
         if (!this.options.embeds.length) throw new InvalidEmbedsLength("I can't send the pagination without embeds.");
 
-        const { messages } = await this.options.ctx.getLocale();
+        const { messages } = await this.options.ctx.locale();
 
         this.options.message = await this.options.ctx.editOrReply(
             {

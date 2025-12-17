@@ -39,7 +39,7 @@ export default class MoveCommand extends Command {
         const { client, options } = ctx;
         const { voice, text } = options;
 
-        const { messages } = await ctx.getLocale();
+        const { messages } = await ctx.locale();
 
         const player = client.manager.getPlayer(ctx.guildId);
         if (!player) return;

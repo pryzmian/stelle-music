@@ -21,7 +21,7 @@ export const checkCooldown: MiddlewareContext<void, AnyContext> = createMiddlewa
     const now: number = Date.now();
     const key: string = getCollectionKey(context);
 
-    const { messages } = await context.getLocale();
+    const { messages } = await context.locale();
 
     const time: number | undefined = collection.get(key);
     if (time && now < time) {

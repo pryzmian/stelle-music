@@ -21,7 +21,7 @@ export default class ShuffleCommand extends Command {
         const player = client.manager.getPlayer(ctx.guildId);
         if (!player) return;
 
-        const { messages } = await ctx.getLocale();
+        const { messages } = await ctx.locale();
 
         await player.queue.shuffle();
         await ctx.editOrReply({

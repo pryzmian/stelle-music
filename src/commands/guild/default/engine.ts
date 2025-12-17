@@ -49,9 +49,9 @@ export default class EngineSubcommand extends SubCommand {
         const { client, options } = ctx;
         const { engine } = options;
 
-        const { messages } = await ctx.getLocale();
+        const { messages } = await ctx.locale();
 
-        await client.database.setPlayer(ctx.guildId, { searchPlatform: engine });
+        await client.database.players.set(ctx.guildId, { searchPlatform: engine });
         await ctx.editOrReply({
             embeds: [
                 {

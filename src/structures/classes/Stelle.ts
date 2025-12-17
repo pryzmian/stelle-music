@@ -80,7 +80,7 @@ export class Stelle extends Client<true> {
                 prefix: async ({ client, guildId }): Promise<string[]> => {
                     const prefixes: string[] = [...client.config.prefixes, client.config.defaultPrefix];
 
-                    if (guildId) prefixes.push(await client.database.getPrefix(guildId));
+                    if (guildId) prefixes.push(await client.database.prefixes.get(guildId));
 
                     return prefixes.map((prefix): string => prefix.toLowerCase());
                 },

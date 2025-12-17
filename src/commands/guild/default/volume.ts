@@ -26,9 +26,9 @@ export default class VolumeSubcommand extends SubCommand {
         const { client, options } = ctx;
         const { volume } = options;
 
-        const { messages } = await ctx.getLocale();
+        const { messages } = await ctx.locale();
 
-        await client.database.setPlayer(ctx.guildId, { defaultVolume: volume });
+        await client.database.players.set(ctx.guildId, { defaultVolume: volume });
         await ctx.editOrReply({
             embeds: [
                 {

@@ -10,7 +10,7 @@ import { MessageFlags } from "seyfert/lib/types/index.js";
 export const checkNodes: MiddlewareContext<void, AnyContext> = createMiddleware<void>(async ({ context, pass, next }) => {
     if (!context.inGuild()) return next();
 
-    const { messages } = await context.getLocale();
+    const { messages } = await context.locale();
     const { client } = context;
 
     if (!client.manager.useable) {
@@ -38,7 +38,7 @@ export const checkPlayer: MiddlewareContext<void, AnyContext> = createMiddleware
     if (!context.inGuild()) return next();
 
     const { client } = context;
-    const { messages } = await context.getLocale();
+    const { messages } = await context.locale();
 
     const player = client.manager.getPlayer(context.guildId);
     if (!player) {
@@ -66,7 +66,7 @@ export const checkQueue: MiddlewareContext<void, AnyContext> = createMiddleware<
     if (!context.inGuild()) return next();
 
     const { client } = context;
-    const { messages } = await context.getLocale();
+    const { messages } = await context.locale();
 
     const player = client.manager.getPlayer(context.guildId);
     if (!player) return pass();
@@ -97,7 +97,7 @@ export const checkTracks: MiddlewareContext<void, AnyContext> = createMiddleware
     if (!context.inGuild()) return next();
 
     const { client } = context;
-    const { messages } = await context.getLocale();
+    const { messages } = await context.locale();
 
     const player = client.manager.getPlayer(context.guildId);
     if (!player) return pass();

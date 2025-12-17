@@ -36,7 +36,7 @@ const options = {
 @Options(options)
 @LocalesT("locales.join.name", "locales.join.description")
 @Middlewares(["checkNodes", "checkVoiceChannel", "checkVoicePermissions", "checkBotVoiceChannel"])
-export default class PlayCommand extends Command {
+export default class JoinCommand extends Command {
     public override async run(ctx: GuildCommandContext<typeof options>): Promise<Message | WebhookMessage | void> {
         const { options, client, channelId, member } = ctx;
 
@@ -53,16 +53,18 @@ export default class PlayCommand extends Command {
 
         const channel = options.voice ?? voice;
 
-        const { defaultVolume } = await client.database.getPlayer(ctx.guildId);
-        const { messages } = await ctx.getLocale();
+        const { defaultVolume } = await client.database.players.get(ctx.guildId);
+        const { messages } = await ctx.locale();
 
-        const player = client.manager.createPlayer({
-            guildId: ctx.guildId,
-            textChannelId: channelId,
-            voiceChannelId: channel.id,
-            volume: defaultVolume,
-            selfDeaf: true,
-        });
+        const player =
+            client.manager.getPlayer(ctx.guildId) ??
+            client.manager.createPlayer({
+                guildId: ctx.guildId,
+                textChannelId: channelId,
+                voiceChannelId: channel.id,
+                volume: defaultVolume,
+                selfDeaf: true,
+            });
 
         if (!player.connected) await player.connect();
 

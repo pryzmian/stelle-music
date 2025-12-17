@@ -19,7 +19,7 @@ export default class QueueCommand extends Command {
     public override async run(ctx: GuildCommandContext): Promise<void> {
         const { client, author } = ctx;
 
-        const { messages } = await ctx.getLocale();
+        const { messages } = await ctx.locale();
 
         const guild = await ctx.guild();
 

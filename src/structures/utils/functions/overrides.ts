@@ -12,7 +12,7 @@ import { sendErrorReport } from "#stelle/utils/functions/report.js";
  * @returns {Promise<void>} A promise... duh.
  */
 export async function onRunError(ctx: AnyContext, error: unknown): Promise<void> {
-    const { messages } = await ctx.getLocale();
+    const { messages } = await ctx.locale();
 
     await sendErrorReport({ error, ctx });
     await ctx.editOrReply({
@@ -37,7 +37,7 @@ export async function onRunError(ctx: AnyContext, error: unknown): Promise<void>
 export async function onAutocompleteError(interaction: AutocompleteInteraction, error: unknown): Promise<void> {
     if (!interaction.guildId) return;
 
-    const { messages } = interaction.client.t(await interaction.client.database.getLocale(interaction.guildId)).get();
+    const { messages } = interaction.client.t(await interaction.client.database.locales.get(interaction.guildId)).get();
 
     await sendErrorReport({ error });
 
@@ -57,7 +57,7 @@ export async function onAutocompleteError(interaction: AutocompleteInteraction, 
  * @returns {Promise<void>} A promise... and a half.
  */
 export async function onPermissionsFail(ctx: AnyContext, permissions: PermissionStrings): Promise<Message | WebhookMessage | void> {
-    const { messages } = await ctx.getLocale();
+    const { messages } = await ctx.locale();
 
     return ctx.editOrReply({
         content: "",
@@ -85,7 +85,7 @@ export async function onPermissionsFail(ctx: AnyContext, permissions: Permission
  * @returns {Promise<void>} A promise... and a half too.
  */
 export async function onBotPermissionsFail(ctx: AnyContext, permissions: PermissionStrings): Promise<Message | WebhookMessage | void> {
-    const { messages } = await ctx.getLocale();
+    const { messages } = await ctx.locale();
 
     return ctx.editOrReply({
         content: "",
@@ -114,7 +114,7 @@ export async function onBotPermissionsFail(ctx: AnyContext, permissions: Permiss
 export async function onOptionsError(ctx: AnyContext): Promise<Message | WebhookMessage | void> {
     if (!ctx.isChat()) return;
 
-    const { messages } = await ctx.getLocale();
+    const { messages } = await ctx.locale();
 
     const command = ctx.command.toJSON();
     const options = getFormattedOptions(command.options, messages.events.optionTypes);

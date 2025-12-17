@@ -13,7 +13,7 @@ export default class ToggleLoopComponent extends ComponentCommand {
         const player = client.manager.getPlayer(ctx.guildId);
         if (!player) return;
 
-        const { messages } = await ctx.getLocale();
+        const { messages } = await ctx.locale();
 
         await player.setRepeatMode(Constants.LoopMode(player.repeatMode));
 

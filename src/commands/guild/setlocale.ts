@@ -52,7 +52,7 @@ export default class SetLocaleCommand extends Command {
         const { client, options } = ctx;
         const { locale } = options;
 
-        const { messages } = await ctx.getLocale();
+        const { messages } = await ctx.locale();
 
         const locales = Object.keys(client.langs.values);
         if (!locales.includes(locale))
@@ -66,7 +66,7 @@ export default class SetLocaleCommand extends Command {
                 ],
             });
 
-        await client.database.setLocale(ctx.guildId, locale);
+        await client.database.locales.update(ctx.guildId, locale);
         await ctx.editOrReply({
             flags: MessageFlags.Ephemeral,
             embeds: [

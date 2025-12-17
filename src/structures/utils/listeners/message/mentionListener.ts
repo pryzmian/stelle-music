@@ -16,7 +16,7 @@ export async function mentionListener(client: UsingClient, message: Message): Pr
 
     const mentionRegex = new RegExp(`^<@!?${client.me.id}>( |)$`);
     if (content.match(mentionRegex)) {
-        const { messages } = client.t(await client.database.getLocale(guildId)).get();
+        const { messages } = client.t(await client.database.locales.get(guildId)).get();
 
         const command = client.commands.values.find((command) => command.name === "help");
         if (!command) {

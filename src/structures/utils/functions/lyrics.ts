@@ -23,7 +23,7 @@ export async function displayLyrics(ctx: AnyContext): Promise<void | Message | W
 
     await ctx.deferReply();
 
-    const { messages } = await ctx.getLocale();
+    const { messages } = await ctx.locale();
 
     const lyrics: LyricsResult | null =
         player.get<LyricsResult | undefined>("lyrics") ??

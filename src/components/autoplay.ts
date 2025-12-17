@@ -10,7 +10,7 @@ export default class AutoplayComponent extends ComponentCommand {
     async run(ctx: GuildComponentContext<typeof this.componentType>): Promise<void> {
         const { client } = ctx;
 
-        const { messages } = await ctx.getLocale();
+        const { messages } = await ctx.locale();
 
         const player = client.manager.getPlayer(ctx.guildId);
         if (!player) return;

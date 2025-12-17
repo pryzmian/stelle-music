@@ -51,7 +51,7 @@ export default class SeekCommand extends Command {
         const { client, options } = ctx;
         const { time } = options;
 
-        const { messages } = await ctx.getLocale();
+        const { messages } = await ctx.locale();
 
         const player = client.manager.getPlayer(ctx.guildId);
         if (!player) return;

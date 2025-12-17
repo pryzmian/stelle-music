@@ -13,7 +13,7 @@ import { formatMemoryUsage } from "#stelle/utils/functions/logger.js";
 @Shortcut()
 export default class BotSubcommand extends SubCommand {
     public override async run(ctx: GuildCommandContext): Promise<void> {
-        const { messages } = await ctx.getLocale();
+        const { messages } = await ctx.locale();
         const { client } = ctx;
 
         const me: ClientUser = await client.me.fetch();

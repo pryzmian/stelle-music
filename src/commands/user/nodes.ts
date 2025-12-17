@@ -17,7 +17,7 @@ import { EmbedPaginator } from "#stelle/utils/paginator.js";
 export default class NodesCommand extends Command {
     public override async run(ctx: GuildCommandContext): Promise<Message | WebhookMessage | void> {
         const { client } = ctx;
-        const { messages } = await ctx.getLocale();
+        const { messages } = await ctx.locale();
 
         const maxFields = 25;
         const fields = client.manager.nodeManager.nodes.map((node) => ({

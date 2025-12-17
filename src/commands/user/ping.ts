@@ -13,7 +13,7 @@ import { StelleOptions } from "#stelle/utils/decorator.js";
 export default class PingCommand extends Command {
     public override async run(ctx: CommandContext): Promise<void> {
         const { client } = ctx;
-        const { messages } = await ctx.getLocale();
+        const { messages } = await ctx.locale();
 
         const embed = new Embed().setColor(client.config.color.extra).setDescription(messages.commands.ping.message).setTimestamp();
 

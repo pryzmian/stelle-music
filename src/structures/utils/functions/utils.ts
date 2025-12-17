@@ -44,17 +44,17 @@ export const StelleContext = extendContext((i) => ({
      * Get the locale from the context.
      * @returns {Promise<DefaultLocale>} The locale object.
      */
-    async getLocale(): Promise<DefaultLocale> {
-        return i.client.t(await this.getLocaleString()).get();
+    async locale(): Promise<DefaultLocale> {
+        return i.client.t(await this.localeString()).get();
     },
     /**
      * Get the locale string from the context.
      * @returns {Promise<LocaleString>} The locale string.
      */
-    getLocaleString(): Promise<LocaleString> {
+    localeString(): Promise<LocaleString> {
         // funny thing, i can't return the locale directly, since this is not asyncronous
         if (!i.guildId) return Promise.resolve((i.user.locale as LocaleString | undefined) ?? i.client.config.defaultLocale);
-        return i.client.database.getLocale(i.guildId);
+        return i.client.database.locales.get(i.guildId);
     },
 }));
 

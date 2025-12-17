@@ -84,7 +84,7 @@ const options = {
 export default class HelpCommand extends Command {
     public override async run(ctx: GuildCommandContext<typeof options>): Promise<Message | WebhookMessage | void> {
         const { client, options } = ctx;
-        const { messages } = await ctx.getLocale();
+        const { messages } = await ctx.locale();
 
         if (options.command === "noCommand")
             return ctx.editOrReply({

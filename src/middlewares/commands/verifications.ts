@@ -11,7 +11,7 @@ export const checkVerifications: MiddlewareContext<void, AnyContext> = createMid
     const { client, author, command } = context;
     const { developerIds } = client.config;
 
-    const { messages } = await context.getLocale();
+    const { messages } = await context.locale();
 
     if (command.onlyDeveloper && !developerIds.includes(author.id)) {
         await context.editOrReply({

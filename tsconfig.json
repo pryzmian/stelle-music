@@ -24,6 +24,7 @@
         "paths": {
             "#stelle/classes/*": ["./src/structures/classes/*"],
             "#stelle/utils/*": ["./src/structures/utils/*"],
+            "#stelle/controllers/*": ["./src/structures/controllers/*"],
             "#stelle/types": ["./src/structures/types/index.ts"],
             "#stelle/middlewares": ["./src/middlewares/index.ts"],
             "#stelle/client": ["./src/index.ts"],

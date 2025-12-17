@@ -20,7 +20,7 @@ export default class AutoplayCommand extends Command {
     public override async run(ctx: GuildCommandContext): Promise<void> {
         const { client } = ctx;
 
-        const { messages } = await ctx.getLocale();
+        const { messages } = await ctx.locale();
 
         const player = client.manager.getPlayer(ctx.guildId);
         if (!player) return;

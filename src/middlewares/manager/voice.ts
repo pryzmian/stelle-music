@@ -10,7 +10,7 @@ import { MessageFlags } from "seyfert/lib/types/index.js";
 export const checkBotVoiceChannel: MiddlewareContext<void, AnyContext> = createMiddleware<void>(async ({ context, pass, next }) => {
     if (!context.inGuild()) return next();
 
-    const { messages } = await context.getLocale();
+    const { messages } = await context.locale();
 
     const me = await context.me();
     if (!me) return;
@@ -43,7 +43,7 @@ export const checkBotVoiceChannel: MiddlewareContext<void, AnyContext> = createM
 export const checkVoiceChannel: MiddlewareContext<void, AnyContext> = createMiddleware<void>(async ({ context, pass, next }) => {
     if (!context.inGuild()) return next();
 
-    const { messages } = await context.getLocale();
+    const { messages } = await context.locale();
 
     const state = await context.member.voice().catch(() => null);
 
@@ -79,7 +79,7 @@ export const checkVoicePermissions: MiddlewareContext<void, AnyContext> = create
     if (!channel) return pass();
 
     const { stagePermissions, voicePermissions } = context.client.config.permissions;
-    const { messages } = await context.getLocale();
+    const { messages } = await context.locale();
 
     const me = await context.me();
     if (!me) return;

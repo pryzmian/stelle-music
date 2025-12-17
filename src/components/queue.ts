@@ -14,7 +14,7 @@ export default class QueueComponent extends ComponentCommand {
 
         const guild = await ctx.guild();
 
-        const { messages } = await ctx.getLocale();
+        const { messages } = await ctx.locale();
 
         const player = client.manager.getPlayer(guild.id);
         if (!player) return;

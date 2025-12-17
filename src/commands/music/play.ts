@@ -35,8 +35,8 @@ const options = {
                 return interaction.respond([{ name: messages.events.autocomplete.noGuild, value: "noGuild" }]);
             }
 
-            const { searchPlatform } = await client.database.getPlayer(guildId);
-            const { messages } = client.t(await client.database.getLocale(guildId)).get();
+            const { searchPlatform } = await client.database.players.get(guildId);
+            const { messages } = client.t(await client.database.locales.get(guildId)).get();
 
             if (!client.manager.useable) return interaction.respond([{ name: messages.events.autocomplete.noNodes, value: "noNodes" }]);
 
@@ -97,16 +97,18 @@ export default class PlayCommand extends Command {
 
         await ctx.deferReply();
 
-        const { messages } = await ctx.getLocale();
-        const { defaultVolume, searchPlatform } = await client.database.getPlayer(ctx.guildId);
+        const { messages } = await ctx.locale();
+        const { defaultVolume, searchPlatform } = await client.database.players.get(ctx.guildId);
 
-        const player = client.manager.createPlayer({
-            guildId: ctx.guildId,
-            textChannelId: channelId,
-            voiceChannelId: voice.id,
-            volume: defaultVolume,
-            selfDeaf: true,
-        });
+        const player =
+            client.manager.getPlayer(ctx.guildId) ??
+            client.manager.createPlayer({
+                guildId: ctx.guildId,
+                textChannelId: channelId,
+                voiceChannelId: voice.id,
+                volume: defaultVolume,
+                selfDeaf: true,
+            });
 
         if (!player.connected) await player.connect();
 
@@ -115,7 +117,7 @@ export default class PlayCommand extends Command {
 
         const { loadType, playlist, tracks } = await player.search({ query, source: searchPlatform }, ctx.author);
 
-        if (!player.get("localeString")) player.set("localeString", await ctx.getLocaleString());
+        if (!player.get("localeString")) player.set("localeString", await ctx.localeString());
         if (!player.get("me")) player.set("me", omitKeys(client.me, ["client"]));
 
         const autoplayIndex = player.get("enabledAutoplay") ? 0 : undefined;
