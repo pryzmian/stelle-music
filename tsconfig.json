@@ -28,8 +28,7 @@
             "#stelle/types": ["./src/structures/types/index.ts"],
             "#stelle/middlewares": ["./src/middlewares/index.ts"],
             "#stelle/client": ["./src/index.ts"],
-            // C'mon prisma, don't do weird things with your generated files
-            "#stelle/prisma": ["./generated/prisma/index"]
+            "#stelle/prisma": ["./src/generated/prisma/client.ts"]
         }
     },
     "include": ["./src/**/*"],
