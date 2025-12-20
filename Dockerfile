@@ -16,10 +16,10 @@ RUN pnpm install --frozen-lockfile --prod=false
 # Copy source code and configuration files
 COPY /src ./src
 COPY /prisma ./prisma
-COPY tsconfig.json seyfert.config.mjs ./
+COPY tsconfig.json seyfert.config.mjs prisma.config.mjs ./
 
 # Generate Prisma client
-RUN pnpm generate
+RUN pnpm db
 
 # Build the TypeScript application
 RUN pnpm build

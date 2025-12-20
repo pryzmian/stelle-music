@@ -269,6 +269,8 @@ export default {
                     CreateGuildExpressions: "Create Guild Expressions",
                     SendPolls: "Send Polls",
                     UseExternalApps: "Use External Apps",
+                    BypassSlowmode: "Bypass Slowmode",
+                    PinMessages: "Pin Messages",
                 } satisfies Record<PermissionNames, string>,
                 user: {
                     description: "`📢` Hey! You are missing some permissions to use this.",
@@ -353,10 +355,8 @@ export default {
             name: "skip",
             description: "Skip the current track.",
             option: {
-                to: {
-                    name: "to",
-                    description: "Skip a specific amount of tracks.",
-                },
+                name: "to",
+                description: "Skip a specific amount of tracks.",
             },
         },
         queue: {

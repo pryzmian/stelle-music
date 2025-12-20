@@ -87,7 +87,9 @@
             "@prisma/client",
             "@prisma/engines",
             "esbuild",
-            "prisma"
+            "prisma",
+            "lavalink-client",
+            "seyfert"
         ]
     }
 }

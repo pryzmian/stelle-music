@@ -6,8 +6,8 @@ const options = {
     to: createIntegerOption({
         description: "Skip a specific amount of tracks.",
         locales: {
-            name: "locales.skip.option.to.name",
-            description: "locales.skip.option.to.description",
+            name: "locales.skip.option.name",
+            description: "locales.skip.option.description",
         },
     }),
 };

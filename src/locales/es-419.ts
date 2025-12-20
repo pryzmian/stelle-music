@@ -265,6 +265,8 @@ export default {
                     CreateGuildExpressions: "Crear Expresiones del Servidor",
                     SendPolls: "Enviar Encuestas",
                     UseExternalApps: "Usar Aplicaciones Externas",
+                    BypassSlowmode: "Omitir Modo Lento",
+                    PinMessages: "Fijar Mensajes",
                 },
                 user: {
                     description: "`📢` ¡Oye! Te faltan algunos permisos para hacer esto.",
@@ -348,10 +350,8 @@ export default {
             name: "saltar",
             description: "Salta la canción actual.",
             option: {
-                to: {
-                    name: "cantidad",
-                    description: "Salta una cantidad especifica de canciones.",
-                },
+                name: "cantidad",
+                description: "Salta una cantidad especifica de canciones.",
             },
         },
         queue: {
