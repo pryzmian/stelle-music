@@ -20,7 +20,7 @@ import { StelleCategory } from "#stelle/types";
 import { StelleOptions } from "#stelle/utils/decorator.js";
 import { getFormattedOptions } from "#stelle/utils/functions/options.js";
 import { TimeFormat } from "#stelle/utils/functions/time.js";
-import { sliceText } from "#stelle/utils/functions/utils.js";
+import { truncate } from "#stelle/utils/functions/utils.js";
 import { EmbedPaginator, StelleStringMenu } from "#stelle/utils/paginator.js";
 
 const options = {
@@ -38,7 +38,7 @@ const options = {
                             const description = command.description_localizations?.[interaction.locale] ?? command.description;
 
                             return {
-                                name: `${command.name} - ${sliceText(description, 124)} (${TimeFormat.toHumanize((command.cooldown ?? 3) * 1000)})`,
+                                name: `${command.name} - ${truncate(description, 124)} (${TimeFormat.toHumanize((command.cooldown ?? 3) * 1000)})`,
                                 value: command.name,
                             };
                         })
@@ -59,7 +59,7 @@ const options = {
 
             return interaction.respond([
                 {
-                    name: `${command.name} - ${sliceText(description, 124)} (${TimeFormat.toHumanize((command.cooldown ?? 3) * 1000)})`,
+                    name: `${command.name} - ${truncate(description, 124)} (${TimeFormat.toHumanize((command.cooldown ?? 3) * 1000)})`,
                     value: command.name,
                 },
             ]);

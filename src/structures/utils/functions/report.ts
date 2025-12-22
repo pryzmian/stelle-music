@@ -6,7 +6,7 @@ import { Environment } from "#stelle/utils/data/configuration.js";
 import { Constants } from "#stelle/utils/data/constants.js";
 
 import { logger } from "#stelle/utils/functions/logger.js";
-import { parseWebhook, sliceText } from "#stelle/utils/functions/utils.js";
+import { parseWebhook, truncate } from "#stelle/utils/functions/utils.js";
 
 /**
  * The report options interface.
@@ -64,7 +64,7 @@ export async function sendErrorReport(options: ReportOptions): Promise<Message |
         .setColor("Red")
         .setTitle(`${title} | Error`)
         .setDescription(
-            `\`🏮\` An error ocurred while I tried to run.\n\n \`📜\` Name: ${sliceText(error.name, 1000)}\n\`📨\` Reason: ${sliceText(error.message, 1000)}`,
+            `\`🏮\` An error ocurred while I tried to run.\n\n \`📜\` Name: ${truncate(error.name, 1000)}\n\`📨\` Reason: ${truncate(error.message, 1000)}`,
         );
 
     if (ctx) {

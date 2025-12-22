@@ -2,7 +2,7 @@ import { existsSync } from "node:fs";
 import { mkdir } from "node:fs/promises";
 import { isAbsolute, join } from "node:path";
 import { pathToFileURL } from "node:url";
-import { inspect } from "node:util";
+import { inspect as nodeInspect } from "node:util";
 import type { Player } from "lavalink-client";
 import {
     ActionRow,
@@ -52,7 +52,9 @@ export const StelleContext = extendContext((i) => ({
      * @returns {Promise<LocaleString>} The locale string.
      */
     localeString(): Promise<LocaleString> {
-        // funny thing, i can't return the locale directly, since this is not asyncronous
+        // funny thing, i can't return the locale directly, since this is not asynchronous
+        // why just don't make the method asynchronous? the get function already returns a promise
+        // so, the function is a promise itself, y'know?
         if (!i.guildId) return Promise.resolve((i.user.locale as LocaleString | undefined) ?? i.client.config.defaultLocale);
         return i.client.database.locales.get(i.guildId);
     },
@@ -65,15 +67,14 @@ export const StelleContext = extendContext((i) => ({
  * @returns {boolean} True if the value is valid.
  */
 export const isValid = (value: unknown): boolean => {
-    if (value === null || value === undefined) return false;
-
-    if (typeof value === "string" && !value.length) return false;
-    if (typeof value === "object" && !Object.keys(value).length) return false;
-    if (typeof value === "number" && Number.isNaN(Number(value))) return false;
-
-    if (Array.isArray(value) && !value.length) return false;
-
-    return true;
+    return (
+        value !== null &&
+        value !== undefined &&
+        (typeof value !== "string" || value.length > 0) &&
+        (typeof value !== "object" || Object.keys(value).length > 0) &&
+        (typeof value !== "number" || !Number.isNaN(Number(value))) &&
+        (!Array.isArray(value) || value.length > 0)
+    );
 };
 
 /**
@@ -157,11 +158,11 @@ export const editButtonComponents = (rows: TopLevelComponents[], options: EditBu
 
 /**
  *
- * Create a new progress bar.
+ * Create a new player progress bar.
  * @param {Player} player The player.
- * @returns {string} The progress bar.
+ * @returns {string} The player track bar.
  */
-export const createBar = (player: Player): string => {
+export const createPlayerBar = (player: Player): string => {
     const size = 15;
     const line = "▬";
     const slider = "🔘";
@@ -212,21 +213,21 @@ export function cleanup(client: UsingClient): void {
 
 /**
  *
- * Slice the text.
- * @param {string} text The text to slice.
- * @param {number} length The length to slice.
- * @returns {string} The sliced text.
+ * Truncate text to a specified length, adding ellipsis if needed.
+ * @param {string} text The text to truncate.
+ * @param {number} length The maximum length.
+ * @returns {string} The truncated text.
  */
-export const sliceText = (text: string, length: number = 240): string => (text.length > length ? `${text.slice(0, length - 3)}...` : text);
+export const truncate = (text: string, length: number = 240): string => (text.length > length ? `${text.slice(0, length - 3)}...` : text);
 
 /**
  *
- * Get the inspected object.
+ * Inspect an object with configurable depth.
  * @param {any} object The object to inspect.
  * @param {number} depth The depth to inspect.
  * @returns {string} The inspected object.
  */
-export const getInspect = (object: any, depth: number = 0): string => inspect(object, { depth });
+export const inspect = (object: any, depth: number = 0): string => nodeInspect(object, { depth });
 
 /**
  *

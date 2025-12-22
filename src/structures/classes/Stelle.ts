@@ -9,7 +9,7 @@ import { Configuration } from "#stelle/utils/data/configuration.js";
 import { Constants } from "#stelle/utils/data/constants.js";
 import { onBotPermissionsFail, onOptionsError, onPermissionsFail, onRunError } from "#stelle/utils/functions/overrides.js";
 import { sendErrorReport } from "#stelle/utils/functions/report.js";
-import { getInspect, StelleContext } from "#stelle/utils/functions/utils.js";
+import { inspect, StelleContext } from "#stelle/utils/functions/utils.js";
 import { StelleDatabase } from "./Database.js";
 import { StelleManager } from "./Manager.js";
 
@@ -185,7 +185,7 @@ export class Stelle extends Client<true> {
 
             this.logger.info("Stelle has been reloaded.");
         } catch (error) {
-            this.logger.error(`Error - ${getInspect(error)}`);
+            this.logger.error(`Error - ${inspect(error)}`);
             throw error;
         }
     }

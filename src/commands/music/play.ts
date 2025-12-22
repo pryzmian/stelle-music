@@ -16,7 +16,7 @@ import { StelleCategory, type StelleUser } from "#stelle/types";
 import { StelleOptions } from "#stelle/utils/decorator.js";
 import { onAutocompleteError } from "#stelle/utils/functions/overrides.js";
 import { TimeFormat } from "#stelle/utils/functions/time.js";
-import { omitKeys, sliceText } from "#stelle/utils/functions/utils.js";
+import { omitKeys, truncate } from "#stelle/utils/functions/utils.js";
 
 const options = {
     query: createStringOption({
@@ -59,7 +59,7 @@ const options = {
                         : (TimeFormat.toDotted(track.info.duration) ?? messages.commands.play.undetermined);
 
                     return {
-                        name: `${sliceText(track.info.title, 45)} (${duration}) - ${sliceText(track.info.author, 30)}`,
+                        name: `${truncate(track.info.title, 45)} (${duration}) - ${truncate(track.info.author, 30)}`,
                         value: track.info.uri,
                     };
                 }),
